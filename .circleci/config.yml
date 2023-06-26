@@ -31,9 +31,15 @@ jobs:
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
       - run: docker push domain314/conint_frontend
   deploy:
+    executor: docker-executor
     steps:
-      - run: # Here, add commands to deploy to AWS using aws cli
-
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Deploy to AWS
+          command: |
+            # Here, add commands to deploy to AWS using aws cli or any other tool you're using
+            
 workflows:
   version: 2
   build-test-and-deliver:
@@ -55,11 +61,8 @@ workflows:
             branches:
               only: main
   deploy:
-    executor: docker-executor
-    steps:
-      - checkout
-      - setup_remote_docker
-      - run:
-          name: Deploy to AWS
-          command: |
-            # Here, add commands to deploy to AWS using aws cli or any other tool you're using
+    jobs:
+      - deploy:
+          filters:
+            branches:
+              only: deploy/production
