@@ -55,8 +55,11 @@ workflows:
             branches:
               only: main
   deploy:
-    jobs:
-      - deploy:
-          filters:
-            branches:
-              only: deploy/production
+    executor: docker-executor
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Deploy to AWS
+          command: |
+            # Here, add commands to deploy to AWS using aws cli or any other tool you're using
