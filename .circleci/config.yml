@@ -28,6 +28,7 @@ jobs:
       - image: cimg/node:20.3.1
     steps:
       - checkout
+      - setup_remote_docker
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
       - run: docker ps
       - run: docker push domain314/conint_frontend:latest
