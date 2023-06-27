@@ -28,7 +28,7 @@ jobs:
     steps:
       - checkout
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
-      - run: docker push domain314/conint_frontend
+      - run: docker-compose build --push domain314/conint_frontend
   deploy:
     executor: docker/docker
     steps:
