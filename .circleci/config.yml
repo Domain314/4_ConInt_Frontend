@@ -19,7 +19,6 @@ jobs:
   build:
     steps:
       - checkout
-      - setup_remote_docker
       - run: npm run build
   deliver:
     docker: 
