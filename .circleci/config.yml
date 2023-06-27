@@ -48,20 +48,32 @@ workflows:
             branches:
               only: main
       - test:
+          requires:
+            - lint
           filters:
             branches:
               only: main
       - build:
+          requires:
+            - test
           filters:
             branches:
               only: main
       - deliver:
+          requires:
+            - build
           filters:
             branches:
               only: main
-  deploy:
-    jobs:
       - deploy:
+          requires:
+            - deliver
           filters:
             branches:
               only: deploy/production
+  # deploy:
+  #   jobs:
+  #     - deploy:
+  #         filters:
+  #           branches:
+  #             only: deploy/production
