@@ -2,8 +2,13 @@ version: 2.1
 orbs:
   node: circleci/node@5.1.0
 jobs:
-  docker: 
-    - image: cimg/node:lts
+  install:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run: node --version
+      - run: docker ps
   lint:
     executor: 
       name: node/default
@@ -19,16 +24,22 @@ jobs:
       - run: npm install
       - run: npm run test
   build:
+    docker: 
+      - image: cimg/node:20.3.1
     steps:
       - checkout
       - setup_remote_docker
       - run: docker build . -t domain314/conint_frontend
   deliver:
+    docker: 
+      - image: cimg/node:20.3.1
     steps:
       - checkout
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
       - run: docker push domain314/conint_frontend:latest
   deploy:
+    docker: 
+      - image: cimg/node:20.3.1
     steps:
       - checkout
       - setup_remote_docker
@@ -41,6 +52,7 @@ workflows:
   version: 2
   build-test-and-deliver:
     jobs:
+      - install
       - lint:
           filters:
             branches:
