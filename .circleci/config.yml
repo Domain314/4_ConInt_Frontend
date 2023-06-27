@@ -17,20 +17,18 @@ jobs:
       - run: npm install
       - run: npm run test
   build:
-    docker: 
-      - image: cimg/node:20.3.1
     steps:
       - checkout
       - setup_remote_docker
-      - run: docker build . -t domain314/conint_frontend
+      - run: npm run build
   deliver:
     docker: 
       - image: cimg/node:20.3.1
     steps:
       - checkout
       - setup_remote_docker
+      - run: docker build . -t domain314/conint_frontend
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
-      - run: docker ps
       - run: docker push domain314/conint_frontend:latest
   deploy:
     docker: 
