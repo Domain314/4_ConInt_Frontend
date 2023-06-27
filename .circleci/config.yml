@@ -1,9 +1,9 @@
 version: 2.1
 orbs:
   node: circleci/node@5.1.0
+jobs:
   docker: 
     - image: cimg/node:lts
-jobs:
   lint:
     executor: 
       name: node/default
