@@ -1,10 +1,13 @@
 # build stage
-FROM node:16 as build-stage
+FROM node:lts-bullseye-slim as build-stage
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
 RUN npm run build
+
+# Debug: list the contents of the /app directory after the build
+RUN ls -la /app
 
 # production stage
 FROM nginx:1.21.0-alpine as production-stage

@@ -22,13 +22,13 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run: docker build -t domain314/conint_frontend .
+      - run: docker build . -t domain314/conint_frontend
   deliver:
     executor: docker/docker
     steps:
       - checkout
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
-      - run: docker push domain314/conint_frontend
+      - run: docker push domain314/conint_frontend:latest
   deploy:
     executor: docker/docker
     steps:
