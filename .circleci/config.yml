@@ -43,8 +43,8 @@ jobs:
       - run:
           name: Deploy to AWS EC2
           command: |
-            scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa dist/ ubuntu@ip-172-31-84-233:~
-            ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@ip-172-31-84-233 'docker pull domain314/conint_frontend:latest && docker run -d -p 80:80 domain314/conint_frontend:latest'
+            scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa_a32dbc05109566f2cba2e75fe5df588f dist/ ubuntu@ip-172-31-84-233:~
+            ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa_a32dbc05109566f2cba2e75fe5df588f ubuntu@ip-172-31-84-233 'docker pull domain314/conint_frontend:latest && docker run -d -p 80:80 domain314/conint_frontend:latest'
 workflows:
   version: 2
   build-test-and-deliver:
