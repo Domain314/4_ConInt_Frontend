@@ -2,36 +2,36 @@ version: 2.1
 orbs:
   node: circleci/node@5.1.0
 jobs:
-  lint:
-    executor: 
-      name: node/default
-    steps:
-      - checkout
-      - run: npm install
-      - run: npm run lint
-  test:
-    executor: 
-      name: node/default
-    steps:
-      - checkout
-      - run: npm install
-      - run: npm run test
-  build:
-    executor: 
-      name: node/default
-    steps:
-      - checkout
-      - run: npm install
-      - run: npm run build
-  deliver:
-    docker: 
-      - image: cimg/node:20.3.1
-    steps:
-      - checkout
-      - setup_remote_docker
-      - run: docker build . -t domain314/conint_frontend
-      - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
-      - run: docker push domain314/conint_frontend:latest
+  # lint:
+  #   executor: 
+  #     name: node/default
+  #   steps:
+  #     - checkout
+  #     - run: npm install
+  #     - run: npm run lint
+  # test:
+  #   executor: 
+  #     name: node/default
+  #   steps:
+  #     - checkout
+  #     - run: npm install
+  #     - run: npm run test
+  # build:
+  #   executor: 
+  #     name: node/default
+  #   steps:
+  #     - checkout
+  #     - run: npm install
+  #     - run: npm run build
+  # deliver:
+  #   docker: 
+  #     - image: cimg/node:20.3.1
+  #   steps:
+  #     - checkout
+  #     - setup_remote_docker
+  #     - run: docker build . -t domain314/conint_frontend
+  #     - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
+  #     - run: docker push domain314/conint_frontend:latest
   deploy:
     docker: 
       - image: cimg/node:20.3.1
@@ -43,37 +43,38 @@ jobs:
       - run:
           name: Deploy to AWS EC2
           command: |
-            scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa_a32dbc05109566f2cba2e75fe5df588f dist/ ubuntu@ip-172-31-84-233:~
-            ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa_a32dbc05109566f2cba2e75fe5df588f ubuntu@ip-172-31-84-233 'docker pull domain314/conint_frontend:latest && docker run -d -p 80:80 domain314/conint_frontend:latest'
+          scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa_a32dbc05109566f2cba2e75fe5df588f dist/ ubuntu@ec2-50-19-240-201.compute-1.amazonaws.com:~
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa_a32dbc05109566f2cba2e75fe5df588f ubuntu@ec2-50-19-240-201.compute-1.amazonaws.com 'docker pull domain314/conint_frontend:latest && docker run -d -p 80:80 domain314/conint_frontend:latest'
+
 workflows:
   version: 2
   build-test-and-deliver:
     jobs:
-      - lint:
-          filters:
-            branches:
-              only: main
-      - test:
-          requires:
-            - lint
-          filters:
-            branches:
-              only: main
-      - build:
-          requires:
-            - test
-          filters:
-            branches:
-              only: main
-      - deliver:
-          requires:
-            - build
-          filters:
-            branches:
-              only: main
+      # - lint:
+      #     filters:
+      #       branches:
+      #         only: main
+      # - test:
+      #     requires:
+      #       - lint
+      #     filters:
+      #       branches:
+      #         only: main
+      # - build:
+      #     requires:
+      #       - test
+      #     filters:
+      #       branches:
+      #         only: main
+      # - deliver:
+      #     requires:
+      #       - build
+      #     filters:
+      #       branches:
+      #         only: main
       - deploy:
-          requires:
-            - deliver
+          # requires:
+          #   - deliver
           filters:
             branches:
               only: main
