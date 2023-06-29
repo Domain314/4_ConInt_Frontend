@@ -36,6 +36,9 @@ jobs:
     docker: 
       - image: cimg/node:20.3.1
     steps:
+      - checkout
+      - run: npm install
+      - run: npm run build
       - add_ssh_keys:
             fingerprints:
               - "a3:2d:bc:05:10:95:66:f2:cb:a2:e7:5f:e5:df:58:8f" # replace with your key fingerprint
