@@ -36,13 +36,14 @@ jobs:
     docker: 
       - image: cimg/node:20.3.1
     steps:
-      - checkout
-      - setup_remote_docker
+      - add_ssh_keys:
+            fingerprints:
+              - "a3:2d:bc:05:10:95:66:f2:cb:a2:e7:5f:e5:df:58:8f" # replace with your key fingerprint
       - run:
-          name: Deploy to AWS
+          name: Deploy to AWS EC2
           command: |
-            # deploy to AWS
-
+            scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa your-app-folder/ ubuntu@ip-172-31-84-233:~
+            ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@ip-172-31-84-233 'docker pull domain314/conint_frontend:latest && docker run -d -p 80:80 domain314/conint_frontend:latest'
 workflows:
   version: 2
   build-test-and-deliver:
@@ -75,9 +76,3 @@ workflows:
           filters:
             branches:
               only: main
-  # deploy:
-  #   jobs:
-  #     - deploy:
-  #         filters:
-  #           branches:
-  #             only: deploy/production
