@@ -20,7 +20,6 @@ const readTodos = async () => {
 
 }
 
-
 const createTodo = async (name) => {
     let res = await axios.post(
         `http://${HOST}:${PORT}/todos`,
