@@ -52,7 +52,12 @@ export default {
         return;
       }
       this.todos = await readTodos(userID);
-      console.log(this.todos);
+      if (this.todos === null) {
+        this.$router.push(`/register`);
+        return;
+      }
+      console.log("todos", this.todos);
+
 
     },
     async post(name) {

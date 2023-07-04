@@ -1,22 +1,29 @@
 import axios from "axios";
 
 const PORT = 3000;
+const HOST = "44.195.229.139" //"localhost"
 
 const readTodos = async () => {
     const userId = localStorage.getItem('userId'); // Get userId from localStorage
-    let res = await axios.get(`http://localhost:${PORT}/todos`, {
-        params: {
-            userId: userId
-        }
-    });
+    try {
+        const res = await axios.get(`http://${HOST}:${PORT}/todos`, {
+            params: {
+                userId: userId
+            }
+        });
+        console.log("res", res);
+        return res.data;
+    } catch (error) {
+        console.error("error:", error.message);
+        return null
+    }
 
-    return res.data;
 }
 
 
 const createTodo = async (name) => {
     let res = await axios.post(
-        `http://localhost:${PORT}/todos`,
+        `http://${HOST}:${PORT}/todos`,
         {
             'name': name,
             'userId': 1
@@ -28,7 +35,7 @@ const createTodo = async (name) => {
 
 const doneTodo = async (id) => {
     let res = await axios.put(
-        `http://localhost:${PORT}/todos/${id}/done`
+        `http://${HOST}:${PORT}/todos/${id}/done`
     );
 
     return res.data;
@@ -36,7 +43,7 @@ const doneTodo = async (id) => {
 
 const undoneTodo = async (id) => {
     let res = await axios.delete(
-        `http://localhost:${PORT}/todos/${id}/done`
+        `http://${HOST}:${PORT}/todos/${id}/done`
     );
 
     return res.data;
@@ -44,7 +51,7 @@ const undoneTodo = async (id) => {
 
 const registerUser = async (username, password) => {
     let res = await axios.post(
-        `http://localhost:${PORT}/users/register`,
+        `http://${HOST}:${PORT}/users/register`,
         {
             'username': username,
             'password': password
@@ -56,7 +63,7 @@ const registerUser = async (username, password) => {
 
 const loginUser = async (username, password) => {
     let res = await axios.post(
-        `http://localhost:${PORT}/users/login`,
+        `http://${HOST}:${PORT}/users/login`,
         {
             'username': username,
             'password': password

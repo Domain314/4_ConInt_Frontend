@@ -5,7 +5,7 @@ import RegisterForm from './components/RegisterForm.vue'
 import TodoList from './components/TodoList.vue'
 
 const routes = [
-    { path: '/', component: App },
+    { path: '/', redirect: '/todos' },
     { path: '/login', component: LoginForm },
     { path: '/register', component: RegisterForm },
     { path: '/todos', component: TodoList }

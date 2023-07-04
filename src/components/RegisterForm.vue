@@ -2,7 +2,11 @@
     <h2 v-if="userGroup === 'A'">Register for A</h2>
     <h2 v-else-if="userGroup === 'B'">Register for B</h2>
     <form @submit.prevent="onSubmit">
-        <!-- other form fields -->
+        <label for="username">Username:</label>
+        <input v-model="username" id="username" required>
+
+        <label for="password">Password:</label>
+        <input v-model="password" id="password" type="password" required>
 
         <button v-if="userGroup === 'A'" class='submit-a' type="submit">Register for A</button>
         <button v-else-if="userGroup === 'B'" class='submit-b' type="submit">Register for B</button>
