@@ -1,6 +1,7 @@
 <template>
     <h2 v-if="userGroup === 'A'">Register for A</h2>
     <h2 v-else-if="userGroup === 'B'">Register for B</h2>
+    <button type="button" @click="goToLogin">Go to Login</button>
     <form @submit.prevent="onSubmit">
         <label for="username">Username:</label>
         <input v-model="username" id="username" required>
@@ -10,7 +11,6 @@
 
         <button v-if="userGroup === 'A'" class='submit-a' type="submit">Register for A</button>
         <button v-else-if="userGroup === 'B'" class='submit-b' type="submit">Register for B</button>
-        <button type="button" @click="goToLogin">Go to Login</button>
     </form>
 </template>
 
@@ -31,7 +31,7 @@ export default {
             localStorage.setItem('userId', user.id); // Save userId to localStorage
             this.$router.push(`/todos`);
         },
-        GoToLogin() {
+        goToLogin() {
             this.$router.push('/login');
         }
     },
@@ -100,11 +100,11 @@ button {
 }
 
 .submit-b {
-    color: rgb(128, 0, 128);
+    color: rgb(0, 98, 128);
 }
 
 .submit-b:hover {
-    color: rgb(121, 1, 151);
+    color: rgb(1, 91, 151);
     background-color: #eeeeee;
 }
 </style>
