@@ -55,34 +55,34 @@ jobs:
 
 workflows:
   version: 2
-  build-test-and-deliver:
+  frontend-jobs:
     jobs:
       - lint:
           filters:
             branches:
-              only: main
+              only: [main, deploy]
       - test:
           requires:
             - lint
           filters:
             branches:
-              only: main
+              only: [main, deploy]
       - build:
           requires:
             - test
           filters:
             branches:
-              only: main
+              only: [main, deploy]
       - deliver:
           requires:
             - build
           filters:
             branches:
-              only: main
+              only: [main, deploy]
       - deploy:
           requires:
             - deliver
           filters:
             branches:
-              only: main
+              only: deploy
 
