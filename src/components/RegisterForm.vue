@@ -31,7 +31,7 @@ export default {
             localStorage.setItem('userId', user.id); // Save userId to localStorage
             this.$router.push(`/todos`);
         },
-        goToLogin() {
+        GoToLogin() {
             this.$router.push('/login');
         }
     },
@@ -100,11 +100,11 @@ button {
 }
 
 .submit-b {
-    color: rgb(0, 98, 128);
+    color: rgb(128, 0, 128);
 }
 
 .submit-b:hover {
-    color: rgb(1, 91, 151);
+    color: rgb(121, 1, 151);
     background-color: #eeeeee;
 }
 </style>
