@@ -1,5 +1,5 @@
 export default {
     features: {
-        sortButton: true
+        sortButton: false
     }
 } 

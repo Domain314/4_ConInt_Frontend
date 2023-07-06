@@ -25,7 +25,7 @@ test('Login Component renders correct text', async () => {
         },
     })
     await wrapper.vm.$nextTick()
-    expect(wrapper.find('h2').text()).toContain('Login')
+    expect(wrapper.find('h2').text()).toContain('hsdggin')
 })
 
 test('Login Component correctly handles form submission', async () => {

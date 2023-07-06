@@ -36,7 +36,11 @@ export default {
         }
     },
     created() {
-        this.userGroup = Math.random() < 0.5 ? 'A' : 'B';
+        const userGroup = localStorage.getItem('userGroup');
+
+
+        this.userGroup = userGroup === undefined ? Math.random() < 0.5 ? 'A' : 'B' : userGroup;
+        localStorage.setItem('userGroup', this.userGroup);
     },
 }
 </script>
