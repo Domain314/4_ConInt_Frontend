@@ -50,6 +50,8 @@ export default {
         this.$router.push(`/register`);
         return;
       }
+      console.log(this.todos);
+
     },
     async post(name) {
       var todo = await createTodo(name);

@@ -4,14 +4,17 @@ const PORT = 3000;
 const HOST = "44.195.229.139" //"localhost"
 
 const readTodos = async () => {
-    const userId = localStorage.getItem('userId'); // Get userId from localStorage
+    const userId = localStorage.getItem('userId');
     try {
         const res = await axios.get(`http://${HOST}:${PORT}/todos`, {
             params: {
                 userId: userId
             }
         });
+        console.log("res.data", res.data);
+
         return res.data;
+
     } catch (error) {
         console.error("error:", error.message);
         return null
@@ -20,11 +23,12 @@ const readTodos = async () => {
 }
 
 const createTodo = async (name) => {
+    const userId = localStorage.getItem('userId');
     let res = await axios.post(
         `http://${HOST}:${PORT}/todos`,
         {
             'name': name,
-            'userId': 1
+            'userId': userId
         }
     );
 
@@ -60,15 +64,22 @@ const registerUser = async (username, password) => {
 }
 
 const loginUser = async (username, password) => {
-    let res = await axios.post(
-        `http://${HOST}:${PORT}/users/login`,
-        {
-            'username': username,
-            'password': password
-        }
-    );
+    try {
+        let res = await axios.post(
+            `http://${HOST}:${PORT}/users/login`,
+            {
+                'username': username,
+                'password': password
+            }
+        );
 
-    return res.data;
+        return res.data;
+    } catch (error) {
+        console.error(error.message);
+        return null;
+
+    }
+
 }
 
 export {

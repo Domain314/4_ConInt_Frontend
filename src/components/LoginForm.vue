@@ -24,6 +24,12 @@ export default {
     methods: {
         async onSubmit() {
             const user = await loginUser(this.username, this.password);
+            if (user === null) {
+                alert('Wrong password');
+                return;
+            }
+            console.log(user);
+
             localStorage.setItem('userId', user.id); // Save userId to localStorage
             this.$router.push(`/todos`);
         },
