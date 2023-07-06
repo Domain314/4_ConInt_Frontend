@@ -77,8 +77,6 @@ input:hover {
     background-color: #2c3e50;
 }
 
-label {}
-
 button {
     padding: 10px 20px;
     margin: 10px;
@@ -100,11 +98,11 @@ button {
 }
 
 .submit-b {
-    color: rgb(0, 98, 128);
+    color: rgb(124, 0, 128);
 }
 
 .submit-b:hover {
-    color: rgb(1, 91, 151);
+    color: rgb(133, 1, 151);
     background-color: #eeeeee;
 }
 </style>

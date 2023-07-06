@@ -50,8 +50,6 @@ export default {
         this.$router.push(`/register`);
         return;
       }
-      console.log(this.todos);
-
     },
     async post(name) {
       var todo = await createTodo(name);
@@ -81,10 +79,6 @@ export default {
         const tom = new Date(date);
         tom.setDate(tom.getDate() + 1);
         return tom.toISOString().split('T')[0];
-      }
-
-      const today = () => {
-        return new Date().toISOString().split('T')[0];
       }
 
       this.todos.forEach((todo) => {

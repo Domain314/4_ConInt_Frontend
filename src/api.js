@@ -11,15 +11,12 @@ const readTodos = async () => {
                 userId: userId
             }
         });
-        console.log("res.data", res.data);
-
         return res.data;
 
     } catch (error) {
         console.error("error:", error.message);
         return null
     }
-
 }
 
 const createTodo = async (name) => {

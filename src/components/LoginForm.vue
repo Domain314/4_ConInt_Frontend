@@ -28,8 +28,6 @@ export default {
                 alert('Wrong password');
                 return;
             }
-            console.log(user);
-
             localStorage.setItem('userId', user.id); // Save userId to localStorage
             this.$router.push(`/todos`);
         },
