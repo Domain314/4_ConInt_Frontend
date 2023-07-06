@@ -87,3 +87,4 @@ Then, use conditional rendering to display different outcomes:
 <h2 v-if="userGroup === 'A'">Register for A</h2>
 <h2 v-else-if="userGroup === 'B'">Register for B</h2>
 ```
+
