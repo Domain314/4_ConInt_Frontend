@@ -11,7 +11,6 @@ const readTodos = async () => {
                 userId: userId
             }
         });
-        console.log("res", res);
         return res.data;
     } catch (error) {
         console.error("error:", error.message);

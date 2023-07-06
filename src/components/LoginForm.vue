@@ -25,8 +25,6 @@ export default {
     methods: {
         async onSubmit() {
             const user = await loginUser(this.username, this.password);
-            console.log('user', user);
-
             localStorage.setItem('userId', user.id); // Save userId to localStorage
             this.$router.push(`/todos`);
         },
@@ -72,8 +70,6 @@ input {
 input:hover {
     background-color: #2c3e50;
 }
-
-label {}
 
 button {
     padding: 10px 20px;

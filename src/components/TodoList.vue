@@ -23,16 +23,10 @@ import TodoInput from "@/components/TodoInput.vue";
 import { createTodo, doneTodo, readTodos, undoneTodo } from "@/api";
 import config from "../config";
 
-console.log('config', config);
-
-
 const userID = { id: null }
-console.log('userID', userID);
 
 function checkUserID(userID) {
   userID.id = localStorage.getItem('userId');
-  console.log('checkUserID', userID);
-
   return userID.id === null;
 }
 
@@ -56,9 +50,6 @@ export default {
         this.$router.push(`/register`);
         return;
       }
-      console.log("todos", this.todos);
-
-
     },
     async post(name) {
       var todo = await createTodo(name);
@@ -104,13 +95,7 @@ export default {
       this.todos.sort((a, b) => {
         return new Date(b.date) - new Date(a.date);
       });
-
-      this.todos.forEach((todo) => {
-        console.log(todo.date);
-
-      });
     }
-
   },
   created() {
     this.getAll();
