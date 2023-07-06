@@ -1,5 +1,6 @@
 <template>
     <h2>Login</h2>
+    <button type="button" @click="goToRegister">Go to Register</button>
     <form @submit.prevent="onSubmit">
         <label for="username">Username:</label>
         <input v-model="username" id="username" required>
@@ -8,8 +9,6 @@
         <input v-model="password" id="password" type="password" required>
 
         <button class='submit' type="submit">Login</button>
-        <button type="button" @click="goToRegister">Go to Register</button>
-
     </form>
 </template>
   
